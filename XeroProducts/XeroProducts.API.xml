@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XeroProducts.API</name>
+    </assembly>
+    <members>
+        <member name="T:XeroProducts.Controllers.ProductOptionsController">
+            <summary>
+            Controller for product options endpoints
+            </summary>
+        </member>
+        <member name="T:XeroProducts.Controllers.ProductsController">
+            <summary>
+            Controller for product endpoints
+            </summary>
+        </member>
+        <member name="T:XeroProducts.Extensions.ExceptionMiddlewareExtensions">
+            <summary>
+            Middleware to globally handle exceptions
+            </summary>
+        </member>
+        <member name="T:XeroProducts.Program">
+            <summary>
+            Starting point for the application.
+            </summary>
+        </member>
+        <member name="T:XeroProducts.Startup">
+            <summary>
+            Startup used to configure services for the application
+            </summary>
+        </member>
+        <member name="M:XeroProducts.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:XeroProducts.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:XeroProducts.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:XeroProducts.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,XeroProducts.Services.ILoggerManager)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+            <param name="logger"></param>
+        </member>
+    </members>
+</doc>
