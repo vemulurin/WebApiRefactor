@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using XeroProducts.Data.Models;
+using XeroProducts.MediatR.Feature.ProductAggregate.Commands;
 using XeroProducts.MediatR.Feature.ProductAggregate.Queries;
 
 namespace XeroProducts.Controllers
@@ -30,61 +30,89 @@ namespace XeroProducts.Controllers
             _mediator = mediator;
 
         }
+       
         /// <summary>
         ///  GET: api/Products
         /// </summary>
         /// <returns>return the list of <c>Products</c></returns>
-
         [HttpGet]
         public async Task<IActionResult> GetProducts()
         {
-            _logger.LogInformation("Get Product List");
+            _logger.LogInformation("Get Product list");
             var query = new GetAllProductsQuery();
             var response = await _mediator.Send(query);
             return Ok(response);
         }
-        //// GET: api/products/name?name={name}
-        //[HttpGet("name")]
-        //public async Task<Product>
-        //    Get([FromQuery][Required(ErrorMessage = "product name cannot be empty",
-        //    AllowEmptyStrings =false
-        //    )]string name)
-        //{
-        //    _logger.LogInformation($"received request for api/products/ with parameters: {name}");
-        //    var product = await _productService.GetProductByName(name);
-        //    return product;
-        //}
-        //// GET: api/Products/5
-        //[HttpGet("{id}")]
-        //public async Task<Product> GetProducts(Guid id)
-        //{
-        //    _logger.LogInformation($"get product for {id}");
-        //    var products = await _productService.GetProducts(id);
-        //    return products;
-        //}
+        
+        /// <summary>
+        ///  GET: api/products/name?name={name}
+        /// </summary>
+        /// <returns>return the products filtered by name</returns>
+        [HttpGet("name")]
+        public async Task<IActionResult> GetProducts(string name)
+        {
+            _logger.LogInformation("Get Product list by name");
+            var query = new GetAllProductsByNameQuery(name);
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        }
 
-        //// PUT: api/Products/5
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutProducts(Guid id, [FromBody] Product product)
-        //{
-        //    _logger.LogInformation($"add product with id {id}");
-        //    return Ok(await _productService.PutProduct(id, product));
-        //}
+        /// <summary>
+        ///  GET: api/products/name?name={id}
+        /// </summary>
+        /// <returns>return the products filtered by id</returns>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProducts(Guid id)
+        {
+            _logger.LogInformation("Get Product list by id");
+            var query = new GetAllProductsByIdQuery(id);
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        }
 
-        //// POST: api/Products
-        //[HttpPost]
-        //public async Task<Product> PostProducts([FromBody] Product product)
-        //{
-        //    _logger.LogInformation($"edit product for {product.Id}");
-        //    return await _productService.PostProduct(product);
-        //}
+        /// <summary>
+        ///  GET: api/product
+        /// </summary>
+        /// <returns>Add new product</returns>
+        [HttpPost]
+        public async Task<IActionResult> PostProducts([FromBody] Product product)
+        {
+            _logger.LogInformation("Add new Product");
+            var query = new CreateProductCommand(product);
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        }
 
-        //// DELETE: api/Products/5
-        //[HttpDelete("{id}")]
-        //public async Task<Guid> DeleteProduct(Guid id)
-        //{
-        //    _logger.LogInformation($"delete product with id {id}");
-        //    return await _productService.DeleteProduct(id);
-        //}
+        /// <summary>
+        /// The <c>HttpPut</c> call update a <c>Product</c>.
+        /// </summary>
+        /// <param name="id">The id of the <c>Product</c> class</param>
+        /// <param name="model" cref="Product">The object of <c>Product</c> class.</param>
+        /// <returns>return Action Result</returns>
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(Guid id, [FromBody] Product model)
+        {
+            if (id != model.Id)
+            {
+                return BadRequest();
+            }
+
+            var command = new UpdateProductCommand(model);
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
+
+        /// <summary>
+        ///  DELETE: api/Products/{id}
+        /// </summary>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProduct(Guid id)
+        {
+            _logger.LogInformation($"Delete Product: {id}");
+            var query = new DeleteProductCommand(id);
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        }
+      
     }
 }

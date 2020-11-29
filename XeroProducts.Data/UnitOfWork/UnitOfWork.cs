@@ -53,6 +53,7 @@ namespace XeroProducts.Data.UnitOfWork
         {
             productsContext = new ProductsContext(null);
             productsRepository = null;
+            productRepository = null;
             productOptionsRepository = null;
             errorDetailsRepository = null;
         }

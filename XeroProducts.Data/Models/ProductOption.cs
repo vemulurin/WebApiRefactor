@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 namespace XeroProducts.Data.Models
 {
     /// <summary>
-    /// Model for Productoption
+    /// Model for ProductOption
     /// </summary>
     public partial class ProductOption
     {
@@ -14,6 +14,7 @@ namespace XeroProducts.Data.Models
         public Guid Id { get; set; }
         [JsonIgnore]
         public Guid ProductId { get; set; }
+
         public string Name { get; set; }
         public string Description { get; set; }
     }

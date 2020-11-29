@@ -35,6 +35,7 @@ namespace XeroProducts
         /// </summary>
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
+        
         {
             services.AddControllers();
             services.AddHttpContextAccessor();

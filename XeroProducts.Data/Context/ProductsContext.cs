@@ -16,7 +16,7 @@ namespace XeroProducts.Data.Context
         }
 
         /// <summary>
-        /// 
+        /// ctor
         /// </summary>
         /// <param name="options"></param>
         public ProductsContext(DbContextOptions<ProductsContext> options)
@@ -24,8 +24,8 @@ namespace XeroProducts.Data.Context
         {
         }
 
-        public virtual DbSet<ProductOptions> ProductOptions { get; set; }
-        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<ProductOption> ProductOptions { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

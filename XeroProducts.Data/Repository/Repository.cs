@@ -42,12 +42,12 @@ namespace XeroProducts.Data.Repository
             }
         }
 
-        public TEntity GetByKey(string key)
+        public TEntity GetByKey(Guid id)
         {
 
             try
             {
-                return entity.Find(key);
+                return entity.Find(id);
             }
             catch (Exception ex)
             {
@@ -162,7 +162,6 @@ namespace XeroProducts.Data.Repository
             }
             catch (Exception ex)
             {
-
                 try
                 {
                     productsContext.Add(Helper.GetErrorLogObject(ex));
@@ -178,11 +177,11 @@ namespace XeroProducts.Data.Repository
 
         }
 
-        public async Task<TEntity> GetByKeyAsync(string key)
+        public async Task<TEntity> GetByKeyAsync(Guid id)
         {
             try
             {
-                return await entity.FindAsync(key);
+                return await entity.FindAsync(id);
 
             }
             catch (Exception ex)
