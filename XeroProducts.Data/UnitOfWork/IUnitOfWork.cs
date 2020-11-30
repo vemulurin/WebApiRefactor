@@ -6,9 +6,8 @@ namespace XeroProducts.Data.UnitOfWork
 {
     public interface IUnitOfWork
     {
-        IRepository<Products> ProductsRepository { get; }
         IRepository<Product> ProductRepository { get; }
-        IRepository<ProductOptions> ProductOptionsRepository { get; }
+        IRepository<ProductOption> ProductOptionRepository { get; }
         IRepository<ErrorDetails> ErrorDetailsRepository { get; }
     }
 }

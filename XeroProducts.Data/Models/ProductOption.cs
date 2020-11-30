@@ -12,7 +12,7 @@ namespace XeroProducts.Data.Models
     {
         [Key]
         public Guid Id { get; set; }
-        [JsonIgnore]
+        //[JsonIgnore]
         public Guid ProductId { get; set; }
 
         public string Name { get; set; }

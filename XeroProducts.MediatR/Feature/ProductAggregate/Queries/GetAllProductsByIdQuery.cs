@@ -8,14 +8,13 @@ using XeroProducts.Data.UnitOfWork;
 
 namespace XeroProducts.MediatR.Feature.ProductAggregate.Queries
 {
-    public class GetAllProductsByIdQuery : IRequest<Products>
+    public class GetAllProductsByIdQuery : IRequest<Product>
     {
         public Guid ProductId { get; set; }
 
         public GetAllProductsByIdQuery(Guid productId)
         {
            ProductId = productId;
-
         }
     }
 
@@ -23,7 +22,7 @@ namespace XeroProducts.MediatR.Feature.ProductAggregate.Queries
     /// Product handler <c>GetAllProductsByIdHandler</c> class.
     /// Contains delegate to excute the query.
     /// </summary>
-    public class GetAllProductsByIdHandler : IRequestHandler<GetAllProductsByIdQuery, Products>
+    public class GetAllProductsByIdHandler : IRequestHandler<GetAllProductsByIdQuery, Product>
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -40,23 +39,19 @@ namespace XeroProducts.MediatR.Feature.ProductAggregate.Queries
         /// <summary>
         /// Delegate to execute query to fetch list of Product.
         /// </summary>
-        /// <param name="query" cref="GetAllProductsByIdQuery">The object of GetAllProductsByIdQuery class.</param>
+        /// <param name="query" cref="GetAllProductOptionsByIdQuery">The object of GetAllProductsByIdQuery class.</param>
         /// <param name="cancellationToken" cref="CancellationToken" >The cancellation token.</param>
         /// <returns>Returns null or the list of Product.</returns>
-        public async Task<Products> Handle(GetAllProductsByIdQuery query, CancellationToken cancellationToken)
+        public async Task<Product> Handle(GetAllProductsByIdQuery query, CancellationToken cancellationToken)
         {
-            var productList = await _unitOfWork.ProductRepository.GetAllAsync();
+            var product = await _unitOfWork.ProductRepository.GetByKeyAsync(query.ProductId);
 
-            if (productList == null)
+            if (product == null)
             {
                 return null;
             }
-            Products products = new Products()
-            {
-                Items = productList.Where(p => p.Id == query.ProductId).ToList()
-            };
-
-            return products;
+            
+            return product;
         }
     }
 }

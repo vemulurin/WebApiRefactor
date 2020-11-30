@@ -5,6 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Feature\ProductOptionsAggregate\NewFolder\**" />
+    <EmbeddedResource Remove="Feature\ProductOptionsAggregate\NewFolder\**" />
+    <None Remove="Feature\ProductOptionsAggregate\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Feature\ProductOptionsAggregate\Queries\GetAllProductOptionsByIdQuery.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MediatR" Version="9.0.0" />
   </ItemGroup>
 

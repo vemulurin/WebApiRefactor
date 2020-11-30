@@ -45,11 +45,11 @@ namespace XeroProducts.MediatR.Feature.ProductAggregate.Commands
         /// <param name="request" cref="DeleteProductCommand">The object of DeleteProductCommand class.</param>
         /// <param name="cancellationToken" cref="CancellationToken" >The cancellation token.</param>
         /// <returns>Returns a unit value.</returns>
-        public Task<bool> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
-            _unitOfWork.ProductRepository.DeleteAsync((_unitOfWork.ProductRepository.GetByKey(request.Id)));
-            _unitOfWork.ProductRepository.SaveAsync();
-            return Task.FromResult(true);
+            await _unitOfWork.ProductRepository.DeleteAsync((_unitOfWork.ProductRepository.GetByKey(request.Id)));
+            await _unitOfWork.ProductRepository.SaveAsync();
+            return await Task.FromResult(true);
         }
     }
 }

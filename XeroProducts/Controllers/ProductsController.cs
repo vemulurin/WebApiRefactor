@@ -58,14 +58,14 @@ namespace XeroProducts.Controllers
         }
 
         /// <summary>
-        ///  GET: api/products/name?name={id}
+        ///  GET: api/products/name?name={productId}
         /// </summary>
-        /// <returns>return the products filtered by id</returns>
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetProducts(Guid id)
+        /// <returns>return the products filtered by productId</returns>
+        [HttpGet("{productId}")]
+        public async Task<IActionResult> GetProducts(Guid productId)
         {
-            _logger.LogInformation("Get Product list by id");
-            var query = new GetAllProductsByIdQuery(id);
+            _logger.LogInformation("Get Product list by productId");
+            var query = new GetAllProductsByIdQuery(productId);
             var response = await _mediator.Send(query);
             return Ok(response);
         }
@@ -86,13 +86,13 @@ namespace XeroProducts.Controllers
         /// <summary>
         /// The <c>HttpPut</c> call update a <c>Product</c>.
         /// </summary>
-        /// <param name="id">The id of the <c>Product</c> class</param>
+        /// <param name="productId">The productId of the <c>Product</c> class</param>
         /// <param name="model" cref="Product">The object of <c>Product</c> class.</param>
         /// <returns>return Action Result</returns>
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, [FromBody] Product model)
+        [HttpPut("{productId}")]
+        public async Task<IActionResult> Put(Guid productId, [FromBody] Product model)
         {
-            if (id != model.Id)
+            if (productId != model.Id)
             {
                 return BadRequest();
             }
@@ -103,16 +103,15 @@ namespace XeroProducts.Controllers
         }
 
         /// <summary>
-        ///  DELETE: api/Products/{id}
+        ///  DELETE: api/Products/{productId}
         /// </summary>
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(Guid id)
+        [HttpDelete("{productId}")]
+        public async Task<IActionResult> DeleteProduct(Guid productId)
         {
-            _logger.LogInformation($"Delete Product: {id}");
-            var query = new DeleteProductCommand(id);
+            _logger.LogInformation($"Delete Product: {productId}");
+            var query = new DeleteProductCommand(productId);
             var response = await _mediator.Send(query);
             return Ok(response);
         }
-      
     }
 }

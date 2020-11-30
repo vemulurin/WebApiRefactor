@@ -34,7 +34,7 @@ namespace XeroProducts.MediatR.Feature.ProductAggregate.Queries
         /// <summary>
         /// Delegate to execute query to fetch list of products.
         /// </summary>
-        /// <param name="query" cref="GetAllProductsQuery">The object of GetAllProductsQuery class.</param>
+        /// <param name="query" cref="GetAllProductOptionsQuery">The object of GetAllProductsQuery class.</param>
         /// <param name="cancellationToken" cref="CancellationToken" >The cancellation token.</param>
         /// <returns>Returns null or the Product list.</returns>
         public async Task<Products> Handle(GetAllProductsQuery query, CancellationToken cancellationToken)

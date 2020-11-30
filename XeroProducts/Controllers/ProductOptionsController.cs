@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 using XeroProducts.Data.Models;
+using XeroProducts.MediatR.Feature.ProductOptionsAggregate.Commands;
+using XeroProducts.MediatR.Feature.ProductOptionsAggregate.Queries;
 
 namespace XeroProducts.Controllers
 {
@@ -10,58 +13,96 @@ namespace XeroProducts.Controllers
     /// Controller for product options endpoints
     /// </summary>
 
-    [Route("api/Products/{id}/options")]
+    [Route("api/Products/{productId}/options")]
     [ApiController]
     public class ProductOptionsController : ControllerBase
     {
-    //    private readonly ILogger<ProductOptionsController> _logger;
-    //    public ProductOptionsController(IProductOptionsService productOptionsService, ILogger<ProductOptionsController> logger)
-    //    {
-    //        _productOptionsService = productOptionsService;
-    //        _logger = logger;
-    //    }
+        private readonly ILogger<ProductOptionsController> _logger;
+        private readonly IMediator _mediator;
+        /// <summary>
+        /// Constructor of <c>ProductOptionsController</c> class.
+        /// </summary>
+        /// <param name="logger" cref="ILogger">Instance reference of <c>ILogger</c></param>
+        /// <param name="mediator" cref="IMediator">Instance reference of <c>IMediator</c></param> 
+        public ProductOptionsController(ILogger<ProductOptionsController> logger, IMediator mediator)
+        {
+            _logger = logger;
+            _mediator = mediator;
+        }
 
-    //    // GET: api/Products/5/options
-    //    [HttpGet]
-    //    public async Task<ProductOptions> GetProductOptionsByProductId(Guid id)
-    //    {
-    //        _logger.LogInformation($"get product options with product id {id}");
-    //        var productOptions = await _productOptionsService.GetProductOptions(id);
-    //        return productOptions;
-    //    }
+        /// <summary>
+        ///  GET: api/Products/{productId}/options
+        /// </summary>
+        /// <returns>return the list of <c>ProductOptions</c></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetProductOptionsByProductId(Guid productId)
+        {
+            _logger.LogInformation("Get ProductOptions list");
+            var query = new GetAllProductOptionsByProductIdQuery(productId);
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        }
 
-    //    // GET: api/Products/5/options
-    //    [HttpGet("{optionId}")]
-    //    public async Task<ProductOption> GetProductOptionsByOptionId(Guid id,Guid optionId)
-    //    {
-    //        _logger.LogInformation($"get product options with product id {id} and option is {optionId}");
-    //        var productOption = await _productOptionsService.GetProductOptionsByOptionId(id, optionId);
-    //        return productOption;
-    //    }
+        /// <summary>
+        ///  GET: api/Products/{productId}/options/{productOptionId}
+        /// </summary>
+        /// <returns>return the list of <c>ProductOptions</c> by OptionId for a Product</returns>
+        [HttpGet("{productOptionId}")]
+        public async Task<IActionResult> GetProductOptionsByOptionId(Guid productId, Guid productOptionId)
+        {
+            _logger.LogInformation("Get ProductOption by OptionId for a product");
+            var query = new GetProductOptionsByOptionIdQuery(productId, productOptionId);
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        }
 
+        /// <summary>
+        ///  GET: api/product
+        /// </summary>
+        /// <returns>Add new product</returns>
+        [HttpPost]
+        public async Task<IActionResult> PostProducts([FromBody] ProductOption productOption)
+        {
+            _logger.LogInformation($"Add new ProductOption to {productOption?.Id}");
+            var query = new CreateProductOptionCommand(productOption);
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        }
 
-    //    // PUT: api/ProductOptions/5
-    //    [HttpPut("{optionId}")]
-    //    public async Task<ProductOption> PutProductOptions(Guid id, Guid optionId,[FromBody] ProductOption productOptions)
-    //    {
-    //        _logger.LogInformation($"edit product options with product id {id} and option is {optionId}");
-    //        return await _productOptionsService.PutProductOptions(id, optionId, productOptions);
-    //    }
+        /// <summary>
+        /// The <c>HttpPut</c> call update a <c>Product</c>.
+        /// </summary>
+        /// <param name="productId">The productId of the <c>ProductOption</c> class</param>
+        /// <param name="productOption" cref="ProductOption">The object of <c>Product</c> class.</param>
+        /// <returns>return Action Result</returns>
+        [HttpPut("{productOptionId}")]
+        public async Task<IActionResult> Put(Guid productId, [FromBody] ProductOption productOption)
+        {
+            if (productId != productOption.ProductId)
+            {
+                return BadRequest();
+            }
 
-    //    // POST: api/ProductOptions
-    //    [HttpPost]
-    //    public async Task<ProductOption> PostProductOptions(Guid id, [FromBody]  ProductOption productOption)
-    //    {
-    //        _logger.LogInformation($"add product options with product id {id} ");
-    //        return await _productOptionsService.PostProductOptions(id, productOption);
-    //    }
+            var command = new UpdateProductOptionCommand(productOption);
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
 
-    //    // DELETE: api/ProductOptions/5
-    //    [HttpDelete("{optionId}")]
-    //    public async Task<Guid> DeleteProductOption(Guid optionId)
-    //    {
-    //        _logger.LogInformation($"delete product options with  option id {optionId}");
-    //        return await _productOptionsService.DeleteProductOptions(optionId);
-    //    }
-   }
+        /// <summary>
+        ///  DELETE: api/Products/{productId}
+        /// </summary>
+        [HttpDelete("{productOptionId}")]
+        public async Task<IActionResult> DeleteProduct(Guid productId, Guid productOptionId)
+        {
+            if (string.IsNullOrEmpty(productOptionId.ToString()) && string.IsNullOrEmpty(productId.ToString()))
+            {
+                return BadRequest();
+            }
+
+            _logger.LogInformation($"Delete ProductOption: {productOptionId}");
+            var query = new DeleteProductOptionCommand(productId, productOptionId);
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        }
+    }
 }

@@ -1,23 +1,22 @@
 ﻿using MediatR;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using XeroProducts.Data.Models;
 using XeroProducts.Data.UnitOfWork;
 
-namespace XeroProducts.MediatR.Feature.ProductAggregate.Commands
+namespace XeroProducts.MediatR.Feature.ProductOptionsAggregate.Commands
 {
-    public class CreateProductCommand : IRequest<bool>
+    public class CreateProductOptionCommand : IRequest<bool>
     {
-        public Product Product { get; }
+        public ProductOption ProductOption { get; }
 
         /// <summary>
         /// Constructor command to create a new product.
         /// </summary>
         /// <param name="model" cref="Product">The object of product class</param>
-        public CreateProductCommand(Product model)
+        public CreateProductOptionCommand(ProductOption model)
         {
-            Product = model;
+            ProductOption = model;
 
         }
     }
@@ -25,7 +24,7 @@ namespace XeroProducts.MediatR.Feature.ProductAggregate.Commands
     /// Product handler <c>CreateProductCommandHandler</c> class.
     /// Contains delegate to excute the command to create a new <c>Product</c>.
     /// </summary>
-    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, bool>
+    public class CreateProductOptionCommandHandler : IRequestHandler<CreateProductOptionCommand, bool>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -33,7 +32,7 @@ namespace XeroProducts.MediatR.Feature.ProductAggregate.Commands
         /// Constructor to handle the create command.
         /// </summary>
         /// <param name="unitOfWork" cref="IUnitOfWork">The generic repository reference for Product model.</param>
-        public CreateProductCommandHandler(IUnitOfWork unitOfWork)
+        public CreateProductOptionCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -44,11 +43,11 @@ namespace XeroProducts.MediatR.Feature.ProductAggregate.Commands
         /// <param name="request" cref="CreateMatchCommand">The object of CreateMatchCommand class.</param>
         /// <param name="cancellationToken" cref="CancellationToken" >The cancellation token.</param>
         /// <returns>Returns a unit value.</returns>
-        public async Task<bool> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(CreateProductOptionCommand request, CancellationToken cancellationToken)
         {
-            await _unitOfWork.ProductRepository.AddAsync(request.Product);
-            await _unitOfWork.ProductRepository.SaveAsync();
-            return await  Task.FromResult(true);
+            await _unitOfWork.ProductOptionRepository.AddAsync(request.ProductOption);
+            await _unitOfWork.ProductOptionRepository.SaveAsync();
+            return await Task.FromResult(true);
         }
     }
 }

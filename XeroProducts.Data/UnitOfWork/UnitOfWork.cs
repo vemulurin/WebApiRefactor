@@ -12,13 +12,12 @@ namespace XeroProducts.Data.UnitOfWork
 
         public UnitOfWork(ProductsContext context) => productsContext = context;
 
-        private IRepository<Products> productsRepository;
-        private IRepository<ProductOptions> productOptionsRepository;
+        private IRepository<ProductOption> productOptionRepository;
         private IRepository<ErrorDetails> errorDetailsRepository;
         private IRepository<Product> productRepository;
-        public IRepository<Products> ProductsRepository => productsRepository ??= new Repository<Products>(productsContext);
+        
         public IRepository<Product> ProductRepository => productRepository ??= new Repository<Product>(productsContext);
-        public IRepository<ProductOptions> ProductOptionsRepository => productOptionsRepository ??= new Repository<ProductOptions>(productsContext);
+        public IRepository<ProductOption> ProductOptionRepository => productOptionRepository ??= new Repository<ProductOption>(productsContext);
         public IRepository<ErrorDetails> ErrorDetailsRepository => errorDetailsRepository ??= new Repository<ErrorDetails>(productsContext);
 
         /// <summary>
@@ -52,9 +51,8 @@ namespace XeroProducts.Data.UnitOfWork
         public void Refresh()
         {
             productsContext = new ProductsContext(null);
-            productsRepository = null;
             productRepository = null;
-            productOptionsRepository = null;
+            productOptionRepository = null;
             errorDetailsRepository = null;
         }
 
