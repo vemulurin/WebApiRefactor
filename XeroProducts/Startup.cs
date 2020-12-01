@@ -58,18 +58,7 @@ namespace XeroProducts
                     Version = "v1",
                     Title = "Xero Produts Web API",
                     Description = "Xero Produts ASP.NET Core Web API",
-                    TermsOfService = new Uri("https://www.xero.com/au/about/legal/terms/"),
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Support Team",
-                        Email = "support@xero.com",
-                        Url = new Uri("https://www.xero.com/au/about/contact/"),
-                    },
-                    License = new OpenApiLicense
-                    {
-                        Name = "Privacy Policy",
-                        Url = new Uri("https://www.xero.com/au/about/legal/privacy/"),
-                    }
+                   
                 });
 
                 // Set the comments path for the Swagger JSON and UI.

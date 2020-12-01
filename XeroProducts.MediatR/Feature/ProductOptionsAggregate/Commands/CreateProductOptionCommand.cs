@@ -11,9 +11,9 @@ namespace XeroProducts.MediatR.Feature.ProductOptionsAggregate.Commands
         public ProductOption ProductOption { get; }
 
         /// <summary>
-        /// Constructor command to create a new product.
+        /// Constructor command to create a new ProductOption.
         /// </summary>
-        /// <param name="model" cref="Product">The object of product class</param>
+        /// <param name="model" cref="Product">The object of ProductOption class</param>
         public CreateProductOptionCommand(ProductOption model)
         {
             ProductOption = model;
@@ -21,8 +21,8 @@ namespace XeroProducts.MediatR.Feature.ProductOptionsAggregate.Commands
         }
     }
     /// <summary>
-    /// Product handler <c>CreateProductCommandHandler</c> class.
-    /// Contains delegate to excute the command to create a new <c>Product</c>.
+    /// Product handler <c>CreateProductOptionCommandHandler</c> class.
+    /// Contains delegate to excute the command to create a new <c>ProductOption</c>.
     /// </summary>
     public class CreateProductOptionCommandHandler : IRequestHandler<CreateProductOptionCommand, bool>
     {
@@ -31,16 +31,16 @@ namespace XeroProducts.MediatR.Feature.ProductOptionsAggregate.Commands
         /// <summary>
         /// Constructor to handle the create command.
         /// </summary>
-        /// <param name="unitOfWork" cref="IUnitOfWork">The generic repository reference for Product model.</param>
+        /// <param name="unitOfWork" cref="IUnitOfWork">The generic repository reference for ProductOption model.</param>
         public CreateProductOptionCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
         /// <summary>
-        /// Delegate to execute create product.
+        /// Delegate to execute create product option.
         /// </summary>
-        /// <param name="request" cref="CreateMatchCommand">The object of CreateMatchCommand class.</param>
+        /// <param name="request" cref="CreateProductOptionCommand">The object of CreateProductOptionCommand class.</param>
         /// <param name="cancellationToken" cref="CancellationToken" >The cancellation token.</param>
         /// <returns>Returns a unit value.</returns>
         public async Task<bool> Handle(CreateProductOptionCommand request, CancellationToken cancellationToken)

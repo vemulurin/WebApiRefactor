@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using XeroProducts.Data.Models;
@@ -41,7 +40,7 @@ namespace XeroProducts.MediatR.Feature.ProductAggregate.Commands
         /// <summary>
         /// Delegate to execute create product.
         /// </summary>
-        /// <param name="request" cref="CreateMatchCommand">The object of CreateMatchCommand class.</param>
+        /// <param name="request" cref="CreateProductCommand">The object of CreateProductCommand class.</param>
         /// <param name="cancellationToken" cref="CancellationToken" >The cancellation token.</param>
         /// <returns>Returns a unit value.</returns>
         public async Task<bool> Handle(CreateProductCommand request, CancellationToken cancellationToken)

@@ -10,9 +10,9 @@ namespace XeroProducts.MediatR.Feature.ProductOptionsAggregate.Commands
     {
         public ProductOption ProductOption { get; }
         /// <summary>
-        /// Constructor command to update product.
+        /// Constructor command to update ProductOption.
         /// </summary>
-        /// <param name="model" cref="Product">The object of product class</param>
+        /// <param name="model" cref="Product">The object of ProductOption class</param>
         /// /// <param name="id" </param>
         public UpdateProductOptionCommand(ProductOption model)
         {
@@ -21,8 +21,8 @@ namespace XeroProducts.MediatR.Feature.ProductOptionsAggregate.Commands
     }
 
     /// <summary>
-    /// Product handler <c>UpdateProductCommandHandler</c> class.
-    /// Contains delegate to excute the command to update <c>Product</c>.
+    /// Product handler <c>UpdateProductOptionCommandHandler</c> class.
+    /// Contains delegate to excute the command to update <c>ProductOption</c>.
     /// </summary>
     public class UpdateProductOptionCommandHandler : IRequestHandler<UpdateProductOptionCommand, bool>
     {
@@ -31,16 +31,16 @@ namespace XeroProducts.MediatR.Feature.ProductOptionsAggregate.Commands
         /// <summary>
         /// Constructor to handle the update command.
         /// </summary>
-        /// <param name="unitOfWork" cref="IUnitOfWork">The generic repository reference for Product model.</param>
+        /// <param name="unitOfWork" cref="IUnitOfWork">The generic repository reference for ProductOption model.</param>
         public UpdateProductOptionCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
         /// <summary>
-        /// Delegate to execute query to update product.
+        /// Delegate to execute query to update ProductOption.
         /// </summary>
-        /// <param name="request" cref="UpdateProductOptionCommand">The object of UpdateProductCommand class.</param>
+        /// <param name="request" cref="UpdateProductOptionCommand">The object of UpdateProductOptionCommand class.</param>
         /// <param name="cancellationToken" cref="CancellationToken" >The cancellation token.</param>
         /// <returns>Returns a unit value.</returns>
         public async Task<bool> Handle(UpdateProductOptionCommand request, CancellationToken cancellationToken)

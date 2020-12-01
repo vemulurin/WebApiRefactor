@@ -58,7 +58,7 @@ namespace XeroProducts.Controllers
         }
 
         /// <summary>
-        ///  GET: api/products/name?name={productId}
+        ///  GET: api/products/{productId}
         /// </summary>
         /// <returns>return the products filtered by productId</returns>
         [HttpGet("{productId}")]
@@ -71,7 +71,7 @@ namespace XeroProducts.Controllers
         }
 
         /// <summary>
-        ///  GET: api/product
+        ///  POST: api/product
         /// </summary>
         /// <returns>Add new product</returns>
         [HttpPost]
@@ -84,14 +84,15 @@ namespace XeroProducts.Controllers
         }
 
         /// <summary>
-        /// The <c>HttpPut</c> call update a <c>Product</c>.
+        ///  PUT: api/Products/{productId}
         /// </summary>
-        /// <param name="productId">The productId of the <c>Product</c> class</param>
-        /// <param name="model" cref="Product">The object of <c>Product</c> class.</param>
+        /// <param name="productId">The productId</param>
+        /// <param name="model" cref="Product">product object</param>
         /// <returns>return Action Result</returns>
         [HttpPut("{productId}")]
         public async Task<IActionResult> Put(Guid productId, [FromBody] Product model)
         {
+            _logger.LogInformation("Update Product");
             if (productId != model.Id)
             {
                 return BadRequest();

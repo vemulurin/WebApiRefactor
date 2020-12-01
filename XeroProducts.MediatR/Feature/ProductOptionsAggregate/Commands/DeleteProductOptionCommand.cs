@@ -14,9 +14,9 @@ namespace XeroProducts.MediatR.Feature.ProductOptionsAggregate.Commands
         public Guid ProductOptionId { get; }
 
         /// <summary>
-        /// Constructor command to delete product.
+        /// Constructor command to delete ProductOption.
         /// </summary>
-        /// <param name="model" cref="Product">The object of product class</param>
+        /// <param name="model" cref="ProductOption">The object of ProductOption class</param>
         public DeleteProductOptionCommand(Guid productId, Guid productOptionId)
         {
             ProductId = productId;
@@ -25,8 +25,8 @@ namespace XeroProducts.MediatR.Feature.ProductOptionsAggregate.Commands
     }
 
     /// <summary>
-    /// Product handler <c>DeleteProductCommandHandler</c> class.
-    /// Contains delegate to excute the command to delete <c>Product</c>.
+    /// Product handler <c>DeleteProductOptionCommandHandler</c> class.
+    /// Contains delegate to excute the command to delete <c>ProductOption</c>.
     /// </summary>
     public class DeleteProductOptionCommandHandler : IRequestHandler<DeleteProductOptionCommand, Guid>
     {
@@ -35,16 +35,16 @@ namespace XeroProducts.MediatR.Feature.ProductOptionsAggregate.Commands
         /// <summary>
         /// Constructor to handle the delete command.
         /// </summary>
-        /// <param name="unitOfWork" cref="IUnitOfWork">The generic repository reference for Product model.</param>
+        /// <param name="unitOfWork" cref="IUnitOfWork">The generic repository reference for ProductOption model.</param>
         public DeleteProductOptionCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
         /// <summary>
-        /// Delegate to execute query to delete product.
+        /// Delegate to execute query to delete ProductOption.
         /// </summary>
-        /// <param name="request" cref="DeleteProductOptionCommand">The object of DeleteProductCommand class.</param>
+        /// <param name="request" cref="DeleteProductOptionCommand">The object of DeleteProductOptionCommand class.</param>
         /// <param name="cancellationToken" cref="CancellationToken" >The cancellation token.</param>
         /// <returns>Returns a unit value.</returns>
         public async Task<Guid> Handle(DeleteProductOptionCommand request, CancellationToken cancellationToken)

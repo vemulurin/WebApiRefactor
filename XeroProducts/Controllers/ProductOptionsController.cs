@@ -46,7 +46,7 @@ namespace XeroProducts.Controllers
         /// <summary>
         ///  GET: api/Products/{productId}/options/{productOptionId}
         /// </summary>
-        /// <returns>return the list of <c>ProductOptions</c> by OptionId for a Product</returns>
+        /// <returns>return the <c>ProductOption</c> by OptionId for a Product</returns>
         [HttpGet("{productOptionId}")]
         public async Task<IActionResult> GetProductOptionsByOptionId(Guid productId, Guid productOptionId)
         {
@@ -57,9 +57,11 @@ namespace XeroProducts.Controllers
         }
 
         /// <summary>
-        ///  GET: api/product
+        ///  GET: api/products/{productId}/options
         /// </summary>
-        /// <returns>Add new product</returns>
+        /// <param name="productOption">The  <c>ProductOption</c> class</param>
+        /// <returns>Add new ProductOption for a Product</returns>
+
         [HttpPost]
         public async Task<IActionResult> PostProducts([FromBody] ProductOption productOption)
         {
@@ -70,11 +72,12 @@ namespace XeroProducts.Controllers
         }
 
         /// <summary>
-        /// The <c>HttpPut</c> call update a <c>Product</c>.
-        /// </summary>
-        /// <param name="productId">The productId of the <c>ProductOption</c> class</param>
-        /// <param name="productOption" cref="ProductOption">The object of <c>Product</c> class.</param>
+        ///  PUT: api/Products/{productId}/options/{optionId}
+        ///</summary>
+        /// <param name="productId">The productId of the <c>Product</c> class</param>
+        /// <param name="productOption">The  <c>ProductOption</c> class</param>
         /// <returns>return Action Result</returns>
+
         [HttpPut("{productOptionId}")]
         public async Task<IActionResult> Put(Guid productId, [FromBody] ProductOption productOption)
         {
@@ -89,8 +92,11 @@ namespace XeroProducts.Controllers
         }
 
         /// <summary>
-        ///  DELETE: api/Products/{productId}
+        ///  DELETE: api/Products/{productId}/options/{optionId}
         /// </summary>
+        /// <param name="productId">The productId of the <c>Product</c> class</param>
+        /// <param name="productOptionId">The productOptionId of the <c>ProductOption</c> class.</param>
+
         [HttpDelete("{productOptionId}")]
         public async Task<IActionResult> DeleteProduct(Guid productId, Guid productOptionId)
         {
