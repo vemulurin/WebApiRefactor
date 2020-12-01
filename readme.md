@@ -9,7 +9,7 @@ The solution comprises of the following projects -
 - **XeroProductsTests** -  Tests
 
 ## Frameworks and Libraries
-- [NET Core 3.1](https://docs.microsoft.com/en-us/aspnet/core/release-notes/aspnetcore-3.1?view=aspnetcore-3.1)
+- [NET Core 5.1](https://docs.microsoft.com/en-us/aspnet/core/release-notes/aspnetcore-5.0?view=aspnetcore-5.0)
 - [EFCore](https://github.com/dotnet/efcore)
 - [NLog](https://github.com/NLog/NLog)
 - [MSTest](https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-mstest)
@@ -24,7 +24,7 @@ The solution comprises of the following projects -
 
 ## How to execute the program
 
-First, install [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1). 
+First, install [.NET Core 5.0](https://dotnet.microsoft.com/download/dotnet-core/5.0). 
 
 
 
