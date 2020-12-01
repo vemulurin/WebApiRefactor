@@ -34,8 +34,8 @@ First, install [.NET Core 5.0](https://dotnet.microsoft.com/download/dotnet-core
 2. Open the XeroProducts solution file (.sln) using Visual Studio 
 3. Run the project 'XeroProducts.API' by selecting the same for the toolbar dropdown.
 4. Once it runs successfully the first end point (`GET /products` - gets all products.) Should be up in the default browser.
-5. Any tool like postman can be used to access the enpoints.
-6. A postman collection for this project is included in the XeroProducts.zip
+5. Any tool like postman can be used to access the enpoints. Else
+6. https://localhost:5001/docs/index.html - Swagger
 
 ## VisualStudio code
 
